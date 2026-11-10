@@ -54,3 +54,22 @@ normalize.py riutilizza la tabella offset33 di oclean_protocol.cpp dzikus, commi
 e74100f042ccb3a01b9cac8acd2a8f5289488466, convertita da secondi a minuti.
 Archivio, controlli ZoneInfo, deduplica e staging sono nuovi codice GPL-3.0-only.
 tzdata è una dipendenza non vendorizzata; versioni in environment-tested.txt.
+
+
+## Port iOS TYPE1 e vettori pubblici
+
+OcleanTYPE1Decoder.swift porta la struttura e i controlli del decoder Python
+locale già adattato dal protocollo dzikus. I66 vettori sono generati interamente
+con dati sintetici, senza catture private. Licenza GPL-3.0-only conservata;
+nessun polling upstream o codice di flash incluso nel client CoreBluetooth.
+
+
+## Archivio e normalizzazione iOS in primo piano
+
+SessionNormalizer.swift porta identità e tabella offset di normalize.py.
+La tabella resta attribuita a dzikus/esphome-oclean, commit
+e74100f042ccb3a01b9cac8acd2a8f5289488466, GPL-3.0-only. Il profilo di fiducia
+per l'export automatico è una nuova scelta di OpenBrush, distinta dal gate
+manuale del banco di prova Python. Archivio e coordinatore sono nuovi codice
+GPL-3.0-only. Nessun SDK upstream vendorizzato e nessun codice di conferma0202.
+Nel pacchetto iOS sono conservati GPL e avvisi con il testo MIT upstream.

@@ -1,5 +1,11 @@
 # OpenBrushLab
 
+**Aggiornamento iOS:** una sola app nativa in `ios/OpenBrush`, bundle
+`it.imix.openbrush`. Python resta banco di prova: nessun trasferimento JSON da
+Windows all'app. Vedi [README_iOS.md](README_iOS.md) per build e firma sul Mac mini.
+Build/iPhone ancora da verificare. P0.3 aggiunge il client BLE e66 vettori condivisi;
+vedi ios/OpenBrush/BLE_PROTOCOL_iOS.md. Nessuna lettura BLE nativa già convalidata.
+
 Documento autonomo per un altro agente: [HANDOFF.md](HANDOFF.md).
 
 Laboratorio Python su Windows per Oclean X Pro Elite Y208, DIS **OCLEANY3X**,
@@ -119,3 +125,14 @@ Codici: 0 operazione completata (non significa validazione HealthKit), 1 errore,
 2 letture parziali o cattura non completa/da rivedere, 130 interruzione.
 Git e il remoto configurato dall'utente vengono preservati; nessuna pubblicazione automatica.
 Fonti, licenze e inventario: THIRD_PARTY_NOTICES.md, LICENSE, docs/created-files.md.
+
+
+## App iOS: sincronizzazione in primo piano
+
+L'app nativa ora collega lettura TYPE1, archivio permanente, normalizzazione e
+HealthKit. UI italiana con Sincronizza, elenco e revisione delle sessioni.
+Leggere [README_iOS.md](README_iOS.md), [contratto iOS](docs/ios-foreground-sync.md)
+e [coesistenza con Oclean](docs/ios-coexistence.md).
+Sorgenti preparati su Windows: compilazione/XCTest e sette giorni reali sono
+ancora da verificare sul Mac mini/iPhone. Nessun invio Bluetooth eseguito da
+questo intervento e nessuna pubblicazione Git.

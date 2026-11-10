@@ -1,0 +1,669 @@
+// !$*UTF8*$!
+{
+	"archiveVersion" = 1;
+	"classes" = {
+	};
+	"objectVersion" = 56;
+	"objects" = {
+		"99D8E83719ACC22BDF5C1940" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "OpenBrush/Fixtures/TestSession.swift";
+			"sourceTree" = "<group>";
+		};
+		"5E8E03B628F54608084400D5" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "99D8E83719ACC22BDF5C1940";
+		};
+		"5209ED8EF1669776A7130A2F" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "OpenBrush/Models/BrushSession.swift";
+			"sourceTree" = "<group>";
+		};
+		"347EA50E0EAB75911C792641" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "5209ED8EF1669776A7130A2F";
+		};
+		"F3EA514F1424880CC4A7DB12" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "OpenBrush/OpenBrushApp.swift";
+			"sourceTree" = "<group>";
+		};
+		"05FC2F811D9F846D2BB692FA" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "F3EA514F1424880CC4A7DB12";
+		};
+		"D1849B1EB930F09601123941" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "OpenBrush/Services/HealthKitClient.swift";
+			"sourceTree" = "<group>";
+		};
+		"B74F851887BAE45B7C71CF0F" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "D1849B1EB930F09601123941";
+		};
+		"4150848A43C8DC1FD5C49BF2" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "OpenBrush/Services/HealthKitWriter.swift";
+			"sourceTree" = "<group>";
+		};
+		"1FE525A79898D74DFFCC5C07" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "4150848A43C8DC1FD5C49BF2";
+		};
+		"9BDBD722EE55D4AFB8AE690D" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "OpenBrush/Services/HealthStoreClient.swift";
+			"sourceTree" = "<group>";
+		};
+		"07F5A11411FCB08D1FD8ACB8" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "9BDBD722EE55D4AFB8AE690D";
+		};
+		"ADBC148E8E067D1A234ACF1B" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "OpenBrush/Services/ReceiptStore.swift";
+			"sourceTree" = "<group>";
+		};
+		"3E4C14EB22D3D67904CF4C4A" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "ADBC148E8E067D1A234ACF1B";
+		};
+		"6AC103FC328A24EBD85F335D" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "OpenBrush/ViewModels/HealthViewModel.swift";
+			"sourceTree" = "<group>";
+		};
+		"8083180C76B212DD9FE7F330" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "6AC103FC328A24EBD85F335D";
+		};
+		"AC751338D9A4C8C2BB818918" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "OpenBrush/Views/ContentView.swift";
+			"sourceTree" = "<group>";
+		};
+		"0C433D96F2CAEA379304F83C" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "AC751338D9A4C8C2BB818918";
+		};
+		"5AE7796D612C8CA878907646" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "OpenBrushTests/BrushSessionTests.swift";
+			"sourceTree" = "<group>";
+		};
+		"021638D6CA13841AE1A76E7A" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "5AE7796D612C8CA878907646";
+		};
+		"1CE62C9476B3B2E3A9356C9A" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "OpenBrushTests/HealthKitWriterTests.swift";
+			"sourceTree" = "<group>";
+		};
+		"0EB48EBC6448D2BDD03B5E09" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "1CE62C9476B3B2E3A9356C9A";
+		};
+		"515AB444FE2F5B1111F79AE0" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "text.plist.xml";
+			"path" = "OpenBrush/Info.plist";
+			"sourceTree" = "<group>";
+		};
+		"29942E835F67FDA6568468B3" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "text.plist.entitlements";
+			"path" = "OpenBrush/OpenBrush.entitlements";
+			"sourceTree" = "<group>";
+		};
+		"D113DA7424A89B3E7FA7EB0A" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "text.xml";
+			"path" = "OpenBrush/PrivacyInfo.xcprivacy";
+			"sourceTree" = "<group>";
+		};
+		"A39309C4376B4D66A5739C05" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "D113DA7424A89B3E7FA7EB0A";
+		};
+		"B0741D11D067F6B661AE658A" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "wrapper.framework";
+			"name" = "HealthKit.framework";
+			"path" = "System/Library/Frameworks/HealthKit.framework";
+			"sourceTree" = "SDKROOT";
+		};
+		"5539D9A2D8B438D8773DB5A3" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "B0741D11D067F6B661AE658A";
+		};
+		"4E783A9E10D2A8ABA38CD11C" = {
+			"isa" = "PBXFileReference";
+			"explicitFileType" = "wrapper.application";
+			"includeInIndex" = 0;
+			"path" = "OpenBrush.app";
+			"sourceTree" = "BUILT_PRODUCTS_DIR";
+		};
+		"6C7CCDEB3609F1FAA874E941" = {
+			"isa" = "PBXFileReference";
+			"explicitFileType" = "wrapper.cfbundle";
+			"includeInIndex" = 0;
+			"path" = "OpenBrushTests.xctest";
+			"sourceTree" = "BUILT_PRODUCTS_DIR";
+		};
+		"3C3B0F03DC089F93B8457928" = {
+			"isa" = "PBXGroup";
+			"children" = (
+				"99D8E83719ACC22BDF5C1940",
+				"5209ED8EF1669776A7130A2F",
+				"F3EA514F1424880CC4A7DB12",
+				"D1849B1EB930F09601123941",
+				"4150848A43C8DC1FD5C49BF2",
+				"9BDBD722EE55D4AFB8AE690D",
+				"ADBC148E8E067D1A234ACF1B",
+				"6AC103FC328A24EBD85F335D",
+				"AC751338D9A4C8C2BB818918",
+				"515AB444FE2F5B1111F79AE0",
+				"29942E835F67FDA6568468B3",
+				"D113DA7424A89B3E7FA7EB0A",
+				"F8890C8D8275DD1D55F1BFB1",
+				"035B7C622761DE183F07CB18",
+				"2B1FA5125E48757FDE16E436",
+				"7F2D7B91B779CBD09C68D711",
+				"A0351863154CA54903BB0E96",
+				"0FB2BC3D58AF6B77A2F4C726",
+				"94AC5EADE822F10D3D81F137",
+				"517430734EB852C1A9652556",
+			);
+			"name" = "OpenBrush";
+			"sourceTree" = "<group>";
+		};
+		"E717C295FF9827DFF805D88B" = {
+			"isa" = "PBXGroup";
+			"children" = (
+				"5AE7796D612C8CA878907646",
+				"1CE62C9476B3B2E3A9356C9A",
+				"200775022DAD011415B46D6A",
+				"ADC607B0008C8EA393333402",
+				"B64391FB1C0FAF55E89DF93D",
+				"1B78A0EDBE4E536323013D9F",
+				"CC58074AFB37E4D725C76235",
+			);
+			"name" = "OpenBrushTests";
+			"sourceTree" = "<group>";
+		};
+		"FBDC4F23F93125BBEEAE800C" = {
+			"isa" = "PBXGroup";
+			"children" = (
+				"4E783A9E10D2A8ABA38CD11C",
+				"6C7CCDEB3609F1FAA874E941",
+			);
+			"name" = "Products";
+			"sourceTree" = "<group>";
+		};
+		"7561BFB015D8F536760CB671" = {
+			"isa" = "PBXGroup";
+			"children" = (
+				"B0741D11D067F6B661AE658A",
+				"7D6E3F9D248B5B6ACE99FDAB",
+			);
+			"name" = "Frameworks";
+			"sourceTree" = "<group>";
+		};
+		"870B3294C0CBD48AF6BBCC1B" = {
+			"isa" = "PBXGroup";
+			"children" = (
+				"3C3B0F03DC089F93B8457928",
+				"E717C295FF9827DFF805D88B",
+				"7561BFB015D8F536760CB671",
+				"FBDC4F23F93125BBEEAE800C",
+			);
+			"sourceTree" = "<group>";
+		};
+		"949D493B91791558E87BC5D7" = {
+			"isa" = "PBXSourcesBuildPhase";
+			"buildActionMask" = 2147483647;
+			"files" = (
+				"5E8E03B628F54608084400D5",
+				"347EA50E0EAB75911C792641",
+				"05FC2F811D9F846D2BB692FA",
+				"B74F851887BAE45B7C71CF0F",
+				"1FE525A79898D74DFFCC5C07",
+				"07F5A11411FCB08D1FD8ACB8",
+				"3E4C14EB22D3D67904CF4C4A",
+				"8083180C76B212DD9FE7F330",
+				"0C433D96F2CAEA379304F83C",
+				"F95E02763F33076EA839B381",
+				"851F26133AC6E58F89438AC5",
+				"87C288F68E0E36AD34C7BFF6",
+				"D4F50D3359FEDF63C408BC59",
+				"39C2559194D82D2F0FB97445",
+				"E0A583A44B0895A83B8F462B",
+				"FA9140B1E4030230DF66B392",
+				"12467C48DC3AF3AB6CE10237",
+			);
+			"runOnlyForDeploymentPostprocessing" = 0;
+		};
+		"77A03FEE20FE96AD9384861E" = {
+			"isa" = "PBXSourcesBuildPhase";
+			"buildActionMask" = 2147483647;
+			"files" = (
+				"021638D6CA13841AE1A76E7A",
+				"0EB48EBC6448D2BDD03B5E09",
+				"D18DFE5FE47AE042C9068A19",
+				"85ECBE90F53D1BBAC5B6D98E",
+				"DB70999A16258CE31E7D5901",
+				"734D6FF8B244754F73BBA37C",
+			);
+			"runOnlyForDeploymentPostprocessing" = 0;
+		};
+		"BD92572B49AC16A86614498D" = {
+			"isa" = "PBXFrameworksBuildPhase";
+			"buildActionMask" = 2147483647;
+			"files" = (
+				"5539D9A2D8B438D8773DB5A3",
+				"77DCA02B7B59F580F5A8AB1F",
+			);
+			"runOnlyForDeploymentPostprocessing" = 0;
+		};
+		"E05DB79C430AA1B0BA487AFC" = {
+			"isa" = "PBXFrameworksBuildPhase";
+			"buildActionMask" = 2147483647;
+			"files" = (
+			);
+			"runOnlyForDeploymentPostprocessing" = 0;
+		};
+		"8ECC8B5D05B79F879ACDF1A2" = {
+			"isa" = "PBXResourcesBuildPhase";
+			"buildActionMask" = 2147483647;
+			"files" = (
+				"A39309C4376B4D66A5739C05",
+			);
+			"runOnlyForDeploymentPostprocessing" = 0;
+		};
+		"D5C76E148680C094C001AC35" = {
+			"isa" = "PBXResourcesBuildPhase";
+			"buildActionMask" = 2147483647;
+			"files" = (
+				"5E6265919C39DEA778850EDD",
+			);
+			"runOnlyForDeploymentPostprocessing" = 0;
+		};
+		"AB52CB08E0FDF02BF6C67C33" = {
+			"isa" = "XCBuildConfiguration";
+			"buildSettings" = {
+				"CLANG_ENABLE_MODULES" = "YES";
+				"CLANG_ENABLE_OBJC_ARC" = "YES";
+				"IPHONEOS_DEPLOYMENT_TARGET" = "17.0";
+				"SDKROOT" = "iphoneos";
+				"SWIFT_VERSION" = "5.0";
+				"ENABLE_USER_SCRIPT_SANDBOXING" = "YES";
+				"SWIFT_OPTIMIZATION_LEVEL" = "-Onone";
+				"DEBUG_INFORMATION_FORMAT" = "dwarf";
+				"ENABLE_TESTABILITY" = "YES";
+				"SWIFT_ACTIVE_COMPILATION_CONDITIONS" = "DEBUG";
+			};
+			"name" = "Debug";
+		};
+		"5283471FF90C511CFE244FFF" = {
+			"isa" = "XCBuildConfiguration";
+			"buildSettings" = {
+				"CLANG_ENABLE_MODULES" = "YES";
+				"CLANG_ENABLE_OBJC_ARC" = "YES";
+				"IPHONEOS_DEPLOYMENT_TARGET" = "17.0";
+				"SDKROOT" = "iphoneos";
+				"SWIFT_VERSION" = "5.0";
+				"ENABLE_USER_SCRIPT_SANDBOXING" = "YES";
+				"SWIFT_OPTIMIZATION_LEVEL" = "-O";
+				"DEBUG_INFORMATION_FORMAT" = "dwarf-with-dsym";
+			};
+			"name" = "Release";
+		};
+		"8804A749385190756AE0BB9A" = {
+			"isa" = "XCConfigurationList";
+			"buildConfigurations" = (
+				"AB52CB08E0FDF02BF6C67C33",
+				"5283471FF90C511CFE244FFF",
+			);
+			"defaultConfigurationIsVisible" = 0;
+			"defaultConfigurationName" = "Release";
+		};
+		"EF00B4C26D3BA245CBAB3F00" = {
+			"isa" = "XCBuildConfiguration";
+			"buildSettings" = {
+				"PRODUCT_NAME" = "$(TARGET_NAME)";
+				"PRODUCT_BUNDLE_IDENTIFIER" = "it.imix.openbrush";
+				"CODE_SIGN_STYLE" = "Automatic";
+				"CODE_SIGN_ENTITLEMENTS" = "OpenBrush/OpenBrush.entitlements";
+				"GENERATE_INFOPLIST_FILE" = "NO";
+				"INFOPLIST_FILE" = "OpenBrush/Info.plist";
+				"MARKETING_VERSION" = "0.1.0";
+				"CURRENT_PROJECT_VERSION" = "1";
+				"TARGETED_DEVICE_FAMILY" = "1";
+				"SUPPORTED_PLATFORMS" = "iphoneos iphonesimulator";
+				"SUPPORTS_MACCATALYST" = "NO";
+				"SWIFT_EMIT_LOC_STRINGS" = "YES";
+				"LD_RUNPATH_SEARCH_PATHS" = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+			};
+			"name" = "Debug";
+		};
+		"49B4940C5F901788C278DD41" = {
+			"isa" = "XCBuildConfiguration";
+			"buildSettings" = {
+				"PRODUCT_NAME" = "$(TARGET_NAME)";
+				"PRODUCT_BUNDLE_IDENTIFIER" = "it.imix.openbrush";
+				"CODE_SIGN_STYLE" = "Automatic";
+				"CODE_SIGN_ENTITLEMENTS" = "OpenBrush/OpenBrush.entitlements";
+				"GENERATE_INFOPLIST_FILE" = "NO";
+				"INFOPLIST_FILE" = "OpenBrush/Info.plist";
+				"MARKETING_VERSION" = "0.1.0";
+				"CURRENT_PROJECT_VERSION" = "1";
+				"TARGETED_DEVICE_FAMILY" = "1";
+				"SUPPORTED_PLATFORMS" = "iphoneos iphonesimulator";
+				"SUPPORTS_MACCATALYST" = "NO";
+				"SWIFT_EMIT_LOC_STRINGS" = "YES";
+				"LD_RUNPATH_SEARCH_PATHS" = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+			};
+			"name" = "Release";
+		};
+		"7A7929063472B13921636247" = {
+			"isa" = "XCConfigurationList";
+			"buildConfigurations" = (
+				"EF00B4C26D3BA245CBAB3F00",
+				"49B4940C5F901788C278DD41",
+			);
+			"defaultConfigurationIsVisible" = 0;
+			"defaultConfigurationName" = "Release";
+		};
+		"532167A2F4DF305CC7A47840" = {
+			"isa" = "XCBuildConfiguration";
+			"buildSettings" = {
+				"PRODUCT_NAME" = "$(TARGET_NAME)";
+				"PRODUCT_BUNDLE_IDENTIFIER" = "it.imix.openbrush.tests";
+				"CODE_SIGN_STYLE" = "Automatic";
+				"GENERATE_INFOPLIST_FILE" = "YES";
+				"TARGETED_DEVICE_FAMILY" = "1";
+				"BUNDLE_LOADER" = "$(TEST_HOST)";
+				"TEST_HOST" = "$(BUILT_PRODUCTS_DIR)/OpenBrush.app/OpenBrush";
+				"LD_RUNPATH_SEARCH_PATHS" = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+			};
+			"name" = "Debug";
+		};
+		"613A5B8C1DD03DF932B456E4" = {
+			"isa" = "XCBuildConfiguration";
+			"buildSettings" = {
+				"PRODUCT_NAME" = "$(TARGET_NAME)";
+				"PRODUCT_BUNDLE_IDENTIFIER" = "it.imix.openbrush.tests";
+				"CODE_SIGN_STYLE" = "Automatic";
+				"GENERATE_INFOPLIST_FILE" = "YES";
+				"TARGETED_DEVICE_FAMILY" = "1";
+				"BUNDLE_LOADER" = "$(TEST_HOST)";
+				"TEST_HOST" = "$(BUILT_PRODUCTS_DIR)/OpenBrush.app/OpenBrush";
+				"LD_RUNPATH_SEARCH_PATHS" = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+			};
+			"name" = "Release";
+		};
+		"6F365D466755115A918E4DCC" = {
+			"isa" = "XCConfigurationList";
+			"buildConfigurations" = (
+				"532167A2F4DF305CC7A47840",
+				"613A5B8C1DD03DF932B456E4",
+			);
+			"defaultConfigurationIsVisible" = 0;
+			"defaultConfigurationName" = "Release";
+		};
+		"EEE53D504AFCC8D4B0AA715A" = {
+			"isa" = "PBXContainerItemProxy";
+			"containerPortal" = "98F54143AB4E86B28C3AFEE0";
+			"proxyType" = 1;
+			"remoteGlobalIDString" = "F75109BEB4DD8800DA6B45F8";
+			"remoteInfo" = "OpenBrush";
+		};
+		"73996D0FF31A2C017A5EAC0F" = {
+			"isa" = "PBXTargetDependency";
+			"target" = "F75109BEB4DD8800DA6B45F8";
+			"targetProxy" = "EEE53D504AFCC8D4B0AA715A";
+		};
+		"F75109BEB4DD8800DA6B45F8" = {
+			"isa" = "PBXNativeTarget";
+			"buildConfigurationList" = "7A7929063472B13921636247";
+			"buildPhases" = (
+				"949D493B91791558E87BC5D7",
+				"BD92572B49AC16A86614498D",
+				"8ECC8B5D05B79F879ACDF1A2",
+			);
+			"buildRules" = (
+			);
+			"dependencies" = (
+			);
+			"name" = "OpenBrush";
+			"productName" = "OpenBrush";
+			"productReference" = "4E783A9E10D2A8ABA38CD11C";
+			"productType" = "com.apple.product-type.application";
+		};
+		"B2BFE0D3C68337315431B2F3" = {
+			"isa" = "PBXNativeTarget";
+			"buildConfigurationList" = "6F365D466755115A918E4DCC";
+			"buildPhases" = (
+				"77A03FEE20FE96AD9384861E",
+				"E05DB79C430AA1B0BA487AFC",
+				"D5C76E148680C094C001AC35",
+			);
+			"buildRules" = (
+			);
+			"dependencies" = (
+				"73996D0FF31A2C017A5EAC0F",
+			);
+			"name" = "OpenBrushTests";
+			"productName" = "OpenBrushTests";
+			"productReference" = "6C7CCDEB3609F1FAA874E941";
+			"productType" = "com.apple.product-type.bundle.unit-test";
+		};
+		"98F54143AB4E86B28C3AFEE0" = {
+			"isa" = "PBXProject";
+			"attributes" = {
+				"BuildIndependentTargetsInParallel" = "YES";
+				"LastUpgradeCheck" = "1500";
+				"TargetAttributes" = {
+					"F75109BEB4DD8800DA6B45F8" = {
+						"CreatedOnToolsVersion" = "15.0";
+						"ProvisioningStyle" = "Automatic";
+						"SystemCapabilities" = {
+							"com.apple.HealthKit" = {
+								"enabled" = 1;
+							};
+						};
+					};
+					"B2BFE0D3C68337315431B2F3" = {
+						"CreatedOnToolsVersion" = "15.0";
+						"TestTargetID" = "F75109BEB4DD8800DA6B45F8";
+					};
+				};
+			};
+			"buildConfigurationList" = "8804A749385190756AE0BB9A";
+			"compatibilityVersion" = "Xcode 14.0";
+			"developmentRegion" = "it";
+			"hasScannedForEncodings" = 0;
+			"knownRegions" = (
+				"it",
+				"en",
+				"Base",
+			);
+			"mainGroup" = "870B3294C0CBD48AF6BBCC1B";
+			"productRefGroup" = "FBDC4F23F93125BBEEAE800C";
+			"projectDirPath" = "";
+			"projectRoot" = "";
+			"targets" = (
+				"F75109BEB4DD8800DA6B45F8",
+				"B2BFE0D3C68337315431B2F3",
+			);
+		};
+		"F8890C8D8275DD1D55F1BFB1" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "OpenBrush/Protocol/OcleanBLEPolicy.swift";
+			"sourceTree" = "<group>";
+		};
+		"F95E02763F33076EA839B381" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "F8890C8D8275DD1D55F1BFB1";
+		};
+		"035B7C622761DE183F07CB18" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "OpenBrush/Protocol/OcleanTYPE1Decoder.swift";
+			"sourceTree" = "<group>";
+		};
+		"851F26133AC6E58F89438AC5" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "035B7C622761DE183F07CB18";
+		};
+		"2B1FA5125E48757FDE16E436" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "OpenBrush/Services/OcleanBLEClient.swift";
+			"sourceTree" = "<group>";
+		};
+		"87C288F68E0E36AD34C7BFF6" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "2B1FA5125E48757FDE16E436";
+		};
+		"7F2D7B91B779CBD09C68D711" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "OpenBrush/Views/OcleanCaptureView.swift";
+			"sourceTree" = "<group>";
+		};
+		"D4F50D3359FEDF63C408BC59" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "7F2D7B91B779CBD09C68D711";
+		};
+		"200775022DAD011415B46D6A" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "OpenBrushTests/OcleanBLEPolicyTests.swift";
+			"sourceTree" = "<group>";
+		};
+		"D18DFE5FE47AE042C9068A19" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "200775022DAD011415B46D6A";
+		};
+		"ADC607B0008C8EA393333402" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "OpenBrushTests/OcleanTYPE1ParityTests.swift";
+			"sourceTree" = "<group>";
+		};
+		"85ECBE90F53D1BBAC5B6D98E" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "ADC607B0008C8EA393333402";
+		};
+		"B64391FB1C0FAF55E89DF93D" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "text.json";
+			"path" = "OpenBrushTests/Fixtures/TYPE1Vectors.json";
+			"sourceTree" = "<group>";
+		};
+		"5E6265919C39DEA778850EDD" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "B64391FB1C0FAF55E89DF93D";
+		};
+		"7D6E3F9D248B5B6ACE99FDAB" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "wrapper.framework";
+			"name" = "CoreBluetooth.framework";
+			"path" = "System/Library/Frameworks/CoreBluetooth.framework";
+			"sourceTree" = "SDKROOT";
+		};
+		"77DCA02B7B59F580F5A8AB1F" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "7D6E3F9D248B5B6ACE99FDAB";
+		};
+		"A0351863154CA54903BB0E96" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "OpenBrush/Models/SessionArchive.swift";
+			"sourceTree" = "<group>";
+		};
+		"39C2559194D82D2F0FB97445" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "A0351863154CA54903BB0E96";
+		};
+		"0FB2BC3D58AF6B77A2F4C726" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "OpenBrush/Services/SessionArchiveStore.swift";
+			"sourceTree" = "<group>";
+		};
+		"E0A583A44B0895A83B8F462B" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "0FB2BC3D58AF6B77A2F4C726";
+		};
+		"94AC5EADE822F10D3D81F137" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "OpenBrush/Services/SessionNormalizer.swift";
+			"sourceTree" = "<group>";
+		};
+		"FA9140B1E4030230DF66B392" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "94AC5EADE822F10D3D81F137";
+		};
+		"517430734EB852C1A9652556" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "OpenBrush/ViewModels/SyncViewModel.swift";
+			"sourceTree" = "<group>";
+		};
+		"12467C48DC3AF3AB6CE10237" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "517430734EB852C1A9652556";
+		};
+		"1B78A0EDBE4E536323013D9F" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "OpenBrushTests/SessionNormalizerTests.swift";
+			"sourceTree" = "<group>";
+		};
+		"DB70999A16258CE31E7D5901" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "1B78A0EDBE4E536323013D9F";
+		};
+		"CC58074AFB37E4D725C76235" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "OpenBrushTests/SyncViewModelTests.swift";
+			"sourceTree" = "<group>";
+		};
+		"734D6FF8B244754F73BBA37C" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "CC58074AFB37E4D725C76235";
+		};
+	};
+	"rootObject" = "98F54143AB4E86B28C3AFEE0";
+}
