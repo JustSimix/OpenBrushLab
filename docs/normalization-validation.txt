@@ -1,0 +1,31 @@
+$ -m pytest -q
+........................................................................ [ 54%]
+.............................................................            [100%]
+133 passed in 1.22s
+
+$ -m pip check
+No broken requirements found.
+
+$ -m openbrushlab normalize-sessions --observations data/observations.json
+{"schema": 1, "utc": "2026-11-10T10:49:29.297807+00:00", "event": "normalization_summary", "captures": 2, "new_captures": 2, "record_observations": 64, "unique_sessions": 33, "duplicate_observations": 31, "merged_distinct_variants": 0, "ios_review_candidates": 1, "held_sessions": 32, "review_reason_counts": {"invalid-device-date": 30, "invalid-or-unverified-device-date": 30, "no-matching-user-observation": 32, "device-score-void-marker": 3, "short-session-needs-review": 3}, "writes_to_apple_health": false}
+
+$ -m openbrushlab normalize-sessions
+{"schema": 1, "utc": "2026-11-10T10:49:29.662240+00:00", "event": "normalization_summary", "captures": 2, "new_captures": 0, "record_observations": 64, "unique_sessions": 33, "duplicate_observations": 31, "merged_distinct_variants": 0, "ios_review_candidates": 1, "held_sessions": 32, "review_reason_counts": {"invalid-device-date": 30, "invalid-or-unverified-device-date": 30, "no-matching-user-observation": 32, "device-score-void-marker": 3, "short-session-needs-review": 3}, "writes_to_apple_health": false}
+
+Private data Git ignore verified:
+data/sessions.json
+data/observations.json
+data/healthkit-candidates.json
+
+Real captures: 64 observations -> 33 unique entries, 31 repeated observations, 1 iOS review candidate, 32 held.
+Rerun byte-identical archive/staging; unchanged source capture SHA-256; sync version stays 1.
+No BLE operations and no Apple Health writes.
+
+Final validation after conservative distinct-variant guard:
+........................................................................ [ 53%]
+..............................................................           [100%]
+134 passed in 1.35s
+
+No broken requirements found.
+
+{"schema": 1, "utc": "2026-11-10T10:52:46.657108+00:00", "event": "normalization_summary", "captures": 2, "new_captures": 0, "record_observations": 64, "unique_sessions": 33, "duplicate_observations": 31, "merged_distinct_variants": 0, "ios_review_candidates": 1, "held_sessions": 32, "review_reason_counts": {"invalid-device-date": 30, "invalid-or-unverified-device-date": 30, "no-matching-user-observation": 32, "device-score-void-marker": 3, "short-session-needs-review": 3}, "writes_to_apple_health": false}

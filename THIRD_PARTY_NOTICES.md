@@ -38,3 +38,19 @@ con licenze originali. Non sono un submodule né un remoto di OpenBrushLab.
 Per riprodurre lo studio clonare le fonti e fare checkout dei commit indicati.
 Bleak, pytest, setuptools e dipendenze transitive restano sotto le rispettive
 licenze e non sono vendorizzati; environment-tested.txt registra l'ambiente.
+
+## Estensione cattura sessioni (2026-11-10)
+
+src/openbrushlab/sessions.py adatta intestazione TYPE1, record 42B e frammento
+inline documentati da dzikus (commit sopra), con controlli di dimensione/date,
+nessuna conversione UTC implicita e stato sempre non pronto per HealthKit.
+src/openbrushlab/capture.py è un nuovo client Bleak limitato alla richiesta
+0307 su fbb89 e alle notifiche fbb90: non porta il ciclo di polling upstream.
+I nuovi moduli sono GPL-3.0-only; copyright e licenze precedenti conservati.
+
+## Normalizzazione offline (2026-11-10)
+
+normalize.py riutilizza la tabella offset33 di oclean_protocol.cpp dzikus, commit
+e74100f042ccb3a01b9cac8acd2a8f5289488466, convertita da secondi a minuti.
+Archivio, controlli ZoneInfo, deduplica e staging sono nuovi codice GPL-3.0-only.
+tzdata è una dipendenza non vendorizzata; versioni in environment-tested.txt.

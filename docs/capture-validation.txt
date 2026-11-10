@@ -1,0 +1,58 @@
+2026-11-10: capture preparation; hardware capture NOT executed.
+........................................................................ [ 78%]
+....................                                                     [100%]
+92 passed in 0.62s
+
+No broken requirements found.
+
+usage: __main__.py capture-sessions [-h] [--allow-session-query]
+                                    [--scan-seconds SCAN_SECONDS]
+                                    [--operation-timeout OPERATION_TIMEOUT]
+                                    [--total-timeout TOTAL_TIMEOUT]
+                                    [--listen-seconds LISTEN_SECONDS]
+                                    [--capture-dir CAPTURE_DIR] [--log LOG]
+                                    [--index INDEX | --address ADDRESS]
+
+options:
+  -h, --help            show this help message and exit
+  --allow-session-query
+                        autorizza la richiesta 0307 e la subscription/cleanup
+                        CCCD
+  --scan-seconds SCAN_SECONDS
+  --operation-timeout OPERATION_TIMEOUT
+  --total-timeout TOTAL_TIMEOUT
+  --listen-seconds LISTEN_SECONDS
+  --capture-dir CAPTURE_DIR
+  --log LOG
+  --index INDEX
+  --address ADDRESS
+
+usage: __main__.py decode-sessions [-h] --output OUTPUT [--log LOG]
+                                   capture_file
+
+positional arguments:
+  capture_file
+
+options:
+  -h, --help       show this help message and exit
+  --output OUTPUT  nuovo JSON privato, non sovrascrive
+  --log LOG
+
+All BLE capture tests used simulated devices.
+Authorized application write in dedicated module: exactly 0307 -> fbb89, response=True.
+Subscription/cleanup: fbb90 only. No ACK/reset/settings/clock/OTA.
+Existing scan/gatt/read modules remain free of transmit/subscription calls.
+
+Live capture 2026-11-10 authorized by user: 68 frames, 1360 bytes, declared 32 records.
+Raw original preserved; no ACK/reset/settings/clock/firmware writes.
+Decoder initially rejected 9 zero trailing bytes. Added bounded fixed-20 padding support.
+........................................................................ [ 75%]
+........................                                                 [100%]
+96 passed in 0.74s
+
+Offline replay: complete-candidate
+
+Second authorized live capture: 32 records, 31 retained exactly, 1 added / 1 removed.
+New record agrees with user completed cycle: scheduled=75, actual_candidate=75, score=59.
+Device-local timestamp agrees with user start minute. No ACK, reset or clock write.
+Analysis only after this one capture; no extra query or immediate brushing test.

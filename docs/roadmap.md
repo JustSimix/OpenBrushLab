@@ -1,27 +1,44 @@
-# Roadmap basata su evidenze
+# Roadmap OpenBrushLab
 
-1. **Ora, implementato e verificato offline:** scanner, inventario GATT,
-   letture standard, privacy, timeout e test con client simulati. L'utente ha
-   riportato scan/connessione/letture standard riuscite su OCLEANY3X; vedere
-   [evidenze e limiti](ocleany3x.md). Inventario GATT e protocollo vendor da validare.
-2. **Validazione Y208 / 1.0.0.36:** raccogliere scan/gatt/read redatti, confermare
-   DIS e proprietà UUID; annotare stato base e risveglio. Criterio: batteria e
-   revisioni ripetibili, nessuna scrittura GATT o subscription. Non aggiornare
-   firmware per rendere il dispositivo compatibile.
-3. **Sessioni offline:** ottenere catture preesistenti e autorizzate, rimuovere
-   identificativi, sviluppare assembler con limiti di dimensione, frammentazione,
-   duplicati, count=0, date invalide e stream incompleti. Conservare distinzione
-   tra campioni sintetici e catture reali; confrontare i due parser upstream.
-   Decodifica, deduplica e timeline in JSON, senza database.
-4. **Sessioni live, bloccate dal vincolo attuale:** download richiede GATT write
-   e subscription. Non saranno abilitate in questa versione. Un'eventuale fase
-   futura richiede una nuova autorizzazione esplicita e analisi separata delle
-   query; escludere comunque conferma 02 02, reset, sincronizzazione orologio
-   e altri comandi mutanti da ogni test iniziale.
-5. **Display, ricerca offline:** catalogare impostazioni e riferimenti APK/asset
-   ottenuti legittimamente; verificare se esiste un meccanismo documentato per
-   contenuti personalizzati. Distinguere preset da rendering arbitrario.
-   Niente brute force di opcode, upload o flash. Esito possibile: non supportato.
+Priorità dell'utente: P0 sessioni e Apple Health prima delle altre feature.
+Stato del 2026-11-10; niente nuove operazioni BLE nella fase di normalizzazione.
 
-Prima di ogni implementazione futura: aggiornare provenienza e licenze, aggiungere
-fixture redatte con contesto modello/firmware e segnare le ipotesi ancora aperte.
+## P0 — sessioni e Salute
+
+1. Completato sul dispositivo: scanner, discovery, revisioni/batteria, due download
+   minimi senza conferma, un nuovo record coerente con una pulizia reale da75s e score59.
+2. Completato Python: normalizzazione, deduplica persistente/provenienza, controlli
+   data/offset/IANA e staging JSON candidato. Reimport identico non crea duplicati
+   o nuove versioni. 33 voci archiviate, 1 candidata iOS e 32 hold.
+3. Da validare durante un futuro utilizzo normale: durata in un ciclo interrotto,
+   pause e semantica temporale; non serve una nuova pulizia immediata. Le30 date
+   anomale restano tali: non sincronizzare o resettare per tentare di ripararle.
+4. Prossima implementazione: componente iOS minima che importa lo staging,
+   richiede autorizzazione HealthKit, mostra la revisione e gestisce ID/versioni
+   sync e ritiri. Provare prima un evento reale, poi invio ripetuto senza duplicati.
+   JSON Windows non scrive direttamente in Salute. Mac/Xcode/iPhone e percorso
+   di firma/distribuzione andranno verificati prima di promettere installazione.
+
+## P1 — qualità, statistiche e gamification
+
+Score59 riscontrato per una sessione. Validare zone/pressione/movimenti su fixture
+e dati reali prima di attribuire significati; zero non equivale a misura assente.
+Poi totali giornalieri/settimanali, streak, confronti e report sui soli record
+con tempo attendibile. Dashboard e UI dopo il P0. Nessuna metrica clinica inventata.
+
+## P2 — programmi e display
+
+Identificativo programma231 osservato, nome/intensità/fasi non ancora letti.
+Studiare encoder upstream e letture impostazioni prima di mutazioni, con prove
+e autorizzazione separate. Lingua/tema non provano rendering arbitrario.
+Testo, immagini, icone e animazioni sono ricerca: nessuna capacità confermata.
+
+## P3 — esperimenti
+
+Telemetria live poco supportata dalle evidenze TYPE1. Batteria già disponibile,
+autonomia e testina richiedono misure nel tempo. Home Assistant dopo eventi P0
+affidabili. Mini-giochi/easter egg subordinati a un vero canale display.
+Non eseguire brute force, flash/OTA, reset o opcode sconosciuti.
+
+Ogni feature avrà prove specifiche e stato implementato/validato/da verificare.
+Le autorizzazioni alle due catture minime non autorizzano tutte le future mutazioni.

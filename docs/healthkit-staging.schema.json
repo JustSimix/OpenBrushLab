@@ -1,0 +1,129 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "OpenBrushLab private HealthKit staging v1",
+  "type": "object",
+  "required": [
+    "format",
+    "schema",
+    "writes_to_apple_health",
+    "requires_review",
+    "requires_ios_healthkit_authorization",
+    "candidates",
+    "retired_candidates",
+    "held_session_count"
+  ],
+  "properties": {
+    "format": {
+      "const": "openbrushlab-healthkit-staging"
+    },
+    "schema": {
+      "const": 1
+    },
+    "writes_to_apple_health": {
+      "const": false
+    },
+    "requires_review": {
+      "const": true
+    },
+    "requires_ios_healthkit_authorization": {
+      "const": true
+    },
+    "held_session_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "retired_candidates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "sync_identifier",
+          "reason"
+        ],
+        "properties": {
+          "sync_identifier": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "candidates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "session_id",
+          "type_identifier",
+          "category_value",
+          "start_date",
+          "end_date",
+          "duration_seconds",
+          "time_zone",
+          "end_time_is_derived",
+          "requires_review",
+          "metadata"
+        ],
+        "properties": {
+          "session_id": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "type_identifier": {
+            "const": "HKCategoryTypeIdentifierToothbrushingEvent"
+          },
+          "category_value": {
+            "const": "notApplicable"
+          },
+          "start_date": {
+            "type": "string",
+            "format": "date-time",
+            "pattern": "Z$"
+          },
+          "end_date": {
+            "type": "string",
+            "format": "date-time",
+            "pattern": "Z$"
+          },
+          "duration_seconds": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 7200
+          },
+          "time_zone": {
+            "type": "string"
+          },
+          "end_time_is_derived": {
+            "const": true
+          },
+          "requires_review": {
+            "const": true
+          },
+          "metadata": {
+            "type": "object",
+            "required": [
+              "HKMetadataKeySyncIdentifier",
+              "HKMetadataKeySyncVersion",
+              "HKMetadataKeyTimeZone"
+            ],
+            "properties": {
+              "HKMetadataKeySyncIdentifier": {
+                "type": "string",
+                "pattern": "^openbrushlab:toothbrushing:v1:[0-9a-f]{64}$"
+              },
+              "HKMetadataKeySyncVersion": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "HKMetadataKeyTimeZone": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

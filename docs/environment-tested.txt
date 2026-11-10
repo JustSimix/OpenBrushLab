@@ -1,15 +1,15 @@
-Windows, Python 3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]
+Windows, Python 3.12.10
 
 bleak==3.1.0
 colorama==0.4.6
 iniconfig==2.3.1
-# Editable Git install with no remote (openbrushlab==0.1.0)
--e e:\simix\projects\openbrushlab
+-e git+https://github.com/JustSimix/OpenBrushLab.git@04385b7b9aedf9298be9bd760bfd6018f2681de2#egg=openbrushlab
 packaging==26.3
 pluggy==1.7.0
 Pygments==2.21.0
 pytest==9.2.0
 typing_extensions==4.16.0
+tzdata==2026.6
 winrt-runtime==4.1.0
 winrt-Windows.Devices.Bluetooth==4!10.0.28000.2957
 winrt-Windows.Devices.Bluetooth.Advertisement==4!10.0.28000.2957

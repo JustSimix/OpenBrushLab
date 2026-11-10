@@ -40,7 +40,7 @@ Y208 non basta per selezionare un profilo: raccogliere modello DIS e revisioni.
 
 Upstream documenta TYPE1 senza auth/pairing, interi big endian, nessun CRC di
 frame e Write With Response richiesto. Non assumere queste proprietà per Y208
-1.0.0.36 senza verifica. Nessuna funzione di questo progetto costruisce o invia
+1.0.0.36 senza verifica. I comandi scan/gatt/read non costruiscono o inviano
 le richieste elencate qui.
 
 | Byte documentati | Significato | Rischio / stato |
@@ -93,3 +93,8 @@ Tema, lingua e orologio non dimostrano la possibilità di inviare immagini,
 testo o disegnare pixel. Non c'è un percorso di rendering arbitrario convalidato
 per questo modello/firmware. Funzioni compleanno/meteo/BluFi del V20 non sono
 evidenza trasferibile a X Pro Elite. Nessun OTA, DFU, firmware o asset caricato.
+
+
+## Aggiornamento cattura sessioni
+
+Il modulo separato capture.py ora prepara il solo percorso 0307/fbb89 + subscription fbb90, con opt-in esplicito. Non e stato ancora eseguito sul dispositivo. Nessun altro comando vendor e abilitato. sessions.py aggiunge il decoder candidato offline; vedere session-capture.md per vincoli, privacy e verifiche.
