@@ -1,0 +1,53 @@
+Validation on Windows, 2026-11-10
+Target path accessible; no fallback.
+
+$ -m pytest -q
+.........................................                                [100%]
+41 passed in 0.53s
+
+$ -m pip check
+No broken requirements found.
+
+$ -m openbrushlab --help
+usage: __main__.py [-h] {scan,gatt,read,decode-status} ...
+
+OpenBrushLab: BLE di sola lettura, nessuna subscription
+
+positional arguments:
+  {scan,gatt,read,decode-status}
+    decode-status       solo offline, payload sintetico o gia redatto
+
+options:
+  -h, --help            show this help message and exit
+
+$ decode-status 0303020e74500000
+{"schema": 1, "utc": "2026-11-10T08:30:28.175757+00:00", "event": "offline_status", "dock_code": 2, "voltage_mv": 3700, "battery": 80, "validation": "upstream-layout-only"}
+
+$ -m pip wheel --no-deps --wheel-dir .research/wheels .
+Processing e:\simix\projects\openbrushlab
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Building wheels for collected packages: openbrushlab
+  Building wheel for openbrushlab (pyproject.toml): started
+  Building wheel for openbrushlab (pyproject.toml): finished with status 'done'
+  Created wheel for openbrushlab: filename=openbrushlab-0.1.0-py3-none-any.whl size=24440 sha256=9c4fbbdd507d2f288ef823e8d0447e0c47a2b82170e5594c12a49221534929af
+  Stored in directory: C:\Users\papar\AppData\Local\Temp\pip-ephem-wheel-cache-9kj9v38g\wheels\fb\8e\73\02b0030347f8563d0a2fc156231195f683229076fa7a558585
+Successfully built openbrushlab
+
+[notice] A new release of pip is available: 25.0.1 -> 26.3
+[notice] To update, run: E:\Simix\Projects\OpenBrushLab\.venv\Scripts\python.exe -m pip install --upgrade pip
+
+Wheel: GPL license, MIT copyright/license and third-party notices verified inside archive.
+
+git remote -v: empty (no remotes).
+Git ignore verified:
+.research/esphome-oclean/LICENSE
+.venv/pyvenv.cfg
+logs/probe.jsonl
+.env
+
+No hardware BLE scan, connection, GATT write, subscription, pairing or firmware operation executed.
