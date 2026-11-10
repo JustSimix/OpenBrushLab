@@ -64,6 +64,7 @@ def assess_record(record, observation, *, new_record_count):
     planned=record["scheduled_duration_s"]
     expected=observation.get("program_expected_s")
     reasons=list(measured["review_reasons"])
+    reasons.extend(record.get("issues", []))
     if new_record_count!=1:
         reasons.append("multiple-new-records-no-automatic-association")
     if observation.get("status") not in ("performed-awaiting-analysis","analyzed"):

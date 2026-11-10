@@ -15,3 +15,17 @@ After synthetic offline capture-diff integration tests:
 ........................................................................ [ 96%]
 .....                                                                    [100%]
 149 passed in 1.35s
+
+Scenario A:one attempt,partial capture,numeric75/30/score37,no retry.
+........................................................................ [ 48%]
+........................................................................ [ 96%]
+......                                                                   [100%]
+150 passed in 1.25s
+
+B:one attempt,complete stream. A record confirmed exactly. B75/75,score66,date invalid,no stopwatch.
+........................................................................ [ 47%]
+........................................................................ [ 94%]
+.........                                                                [100%]
+153 passed in 1.27s
+
+Original raw checksums unchanged. No additional BLE operations.

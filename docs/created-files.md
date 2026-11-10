@@ -68,3 +68,5 @@ Dati privati generati dalla normalizzazione: data/sessions.json, data/observatio
 - `tests/test_experiments.py`
 - `docs/interrupted-paused-trials.md`
 - `docs/interrupted-paused-validation.txt`
+
+- `docs/interrupted-paused-results.md`
