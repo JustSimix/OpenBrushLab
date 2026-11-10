@@ -5,7 +5,8 @@
 nei test. La fonte live Ã¨ OcleanBLEClient; nessun file Windows Ã¨ importato.
 
 1. Un tentativo per ingresso in primo piano, oppure tap esplicito. Nessun retry.
-2. Client esistente: scan service filtrato, DIS esatto, subscribe fbb90, una sola
+2. Discovery: retrieval dei device connessi/già verificati, altrimenti scan foreground
+   senza filtro servizio e matching nome Oclean OR servizio. DIS esatto, subscribe fbb90, una sola
    scrittura 03 07 withResponse su fbb89, raccolta 12s, cleanup/disconnect. Restano
    256 notifiche, 8192 byte, timeout totale 75s. Nessun nuovo comando.
 3. Cattura con ora iPhone e metadati di trasporto. Un record deve essere comparso

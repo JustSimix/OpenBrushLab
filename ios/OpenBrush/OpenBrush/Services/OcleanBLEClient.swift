@@ -2,6 +2,7 @@
 import Foundation
 import Combine
 import CoreBluetooth
+import OSLog
 
 /// All operations and delegate callbacks run on CBCentralManager's main queue.
 /// Manager creation and scan happen on a foreground synchronization request.
@@ -25,6 +26,8 @@ final class OcleanBLEClient: NSObject, ObservableObject {
     private var central: CBCentralManager?
     private var target: CBPeripheral?
     private var candidates: [UUID: CBPeripheral] = [:]
+    private let knownPeripheral = OcleanKnownPeripheralStore()
+    private let logger = Logger(subsystem: "it.imix.openbrush", category: "ble")
     private var vendorService: CBService?
     private var disService: CBService?
     private var tx: CBCharacteristic?
@@ -70,7 +73,7 @@ final class OcleanBLEClient: NSObject, ObservableObject {
         notificationCount = 0; receivedBytes = 0; lastResult = nil; transportCompleted = false
         pendingMessage = ""; pendingSuccess = false
         isBusy = true; phase = .waitingForPower
-        status = "Preparazione Bluetoothâ€¦ Risveglia il display dello spazzolino."
+        status = "Preparazione Bluetooth… Risveglia il display dello spazzolino."
         let token = attemptID
         let deadline = DispatchWorkItem { [weak self] in
             guard let self, self.attemptID == token else { return }
@@ -98,8 +101,21 @@ final class OcleanBLEClient: NSObject, ObservableObject {
         case .poweredOn:
             guard phase == .waitingForPower else { return }
             phase = .scanning
-            status = "Ricerca dello spazzolino vicinoâ€¦"
-            manager.scanForPeripherals(withServices: [serviceUUID],
+            // Merge both retrieval paths before selecting: two distinct IDs are ambiguous.
+            for peripheral in manager.retrieveConnectedPeripherals(withServices: [serviceUUID]) {
+                candidates[peripheral.identifier] = peripheral
+                logRetrieved(peripheral, source: "collegato-al-sistema")
+            }
+            if let identifier = knownPeripheral.identifier {
+                for peripheral in manager.retrievePeripherals(withIdentifiers: [identifier]) {
+                    candidates[peripheral.identifier] = peripheral
+                    logRetrieved(peripheral, source: "identificativo-DIS-verificato")
+                }
+            }
+            if !candidates.isEmpty { finishScan(); return }
+            status = "Ricerca dello spazzolino vicino…"
+            logger.info("Inizio scan foreground senza filtro di servizio; filtro Oclean locale attivo")
+            manager.scanForPeripherals(withServices: nil,
                                       options: [CBCentralManagerScanOptionAllowDuplicatesKey: false])
             let token = attemptID
             let timer = DispatchWorkItem { [weak self] in
@@ -119,18 +135,25 @@ final class OcleanBLEClient: NSObject, ObservableObject {
     private func finishScan() {
         guard isBusy, phase == .scanning, let central else { return }
         central.stopScan()
-        guard candidates.count == 1, let selected = candidates.values.first else {
-            captureIssue = candidates.isEmpty ? .scanEmpty : .ambiguous
-            finish(candidates.isEmpty ? "Nessuno spazzolino trovato. Nessun nuovo tentativo automatico."
-                                     : "PiÃ¹ dispositivi compatibili vicini: nessun collegamento eseguito.", success: false)
+        let selection = OcleanDiscoveryPolicy.select(identifiers: Array(candidates.keys))
+        guard case .single(let identifier) = selection, let selected = candidates[identifier] else {
+            captureIssue = selection == .none ? .scanEmpty : .ambiguous
+            logger.info("Discovery conclusa: candidati=\(self.candidates.count, privacy: .public), nessun collegamento")
+            finish(OcleanDiscoveryPolicy.failureMessage(captureIssue) ?? "Ricerca non conclusa.", success: false)
             return
         }
+        logger.info("Un candidato selezionato; verifica DIS obbligatoria prima della richiesta")
         attemptDeviceKey = SessionHash.deviceKey(peripheralID: selected.identifier)
         target = selected
         selected.delegate = self
         phase = .connecting
-        status = "Collegamento allo spazzolinoâ€¦"
+        status = "Collegamento allo spazzolino…"
         central.connect(selected, options: nil)
+    }
+
+    private func logRetrieved(_ peripheral: CBPeripheral, source: String) {
+        // Retrieval reports a known service, NOT an advertisement or a new RSSI measurement.
+        logger.info("Periferica recuperata nome=\(peripheral.name ?? "assente", privacy: .private) serviceUUIDAdvertising=non-disponibile RSSI=non-disponibile accettata=true motivo=\(source, privacy: .public)")
     }
 
     private func one(_ uuid: CBUUID, in service: CBService, property: CBCharacteristicProperties) -> CBCharacteristic? {
@@ -151,7 +174,7 @@ final class OcleanBLEClient: NSObject, ObservableObject {
         self.tx = tx; self.rx = rx
         modelCharacteristic = model; softwareCharacteristic = software
         phase = .identity
-        status = "Verifica del modello e della versioneâ€¦"
+        status = "Verifica del modello e della versione…"
         target.readValue(for: model)
         target.readValue(for: software)
     }
@@ -170,8 +193,10 @@ final class OcleanBLEClient: NSObject, ObservableObject {
             finish(OcleanBLEError.wrongIdentity.localizedDescription, success: false)
             return
         }
+        knownPeripheral.remember(target.identifier, model: model, software: software)
+        logger.info("DIS verificato: OCLEANY3X, software 1.0.0.36; candidato memorizzato localmente")
         phase = .subscribing
-        status = "Modello e versione verificati. Attivazione del canale sessioniâ€¦"
+        status = "Modello e versione verificati. Attivazione del canale sessioni…"
         notificationRequested = true
         target.setNotifyValue(true, for: rx)
     }
@@ -184,7 +209,7 @@ final class OcleanBLEClient: NSObject, ObservableObject {
         if lastResult == nil { lastResult = assembler.result(deviceKey: decoderDeviceKey) }
         if !success && captureIssue == nil { captureIssue = .other }
         pendingMessage = message; pendingSuccess = success; phase = .cleaning
-        status = "Chiusura del collegamentoâ€¦"
+        status = "Chiusura del collegamento…"
         let token = attemptID
         let cleanup = DispatchWorkItem { [weak self] in
             guard let self, self.attemptID == token else { return }
@@ -230,8 +255,10 @@ final class OcleanBLEClient: NSObject, ObservableObject {
 
     private func totalDeadline() {
         guard isBusy else { return }
-        captureIssue = .timeout
-        if phase != .cleaning { finish("Tempo massimo di 75 secondi raggiunto. Nessun nuovo tentativo automatico.", success: false) }
+        captureIssue = phase == .connecting ? .connectionUnavailable : .timeout
+        if phase != .cleaning {
+            finish(OcleanDiscoveryPolicy.failureMessage(captureIssue) ?? "Tempo massimo di 75 secondi raggiunto. Nessun nuovo tentativo automatico.", success: false)
+        }
         else { pendingSuccess = false; pendingMessage = "Tempo massimo raggiunto durante la chiusura del collegamento." }
         forceDisconnectAndPublish()
     }
@@ -250,12 +277,19 @@ extension OcleanBLEClient: CBCentralManagerDelegate {
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral,
                         advertisementData: [String: Any], rssi RSSI: NSNumber) {
         guard isBusy, phase == .scanning else { return }
+        let localName = advertisementData[CBAdvertisementDataLocalNameKey] as? String
+        let advertisedServices = advertisementData[CBAdvertisementDataServiceUUIDsKey] as? [CBUUID] ?? []
+        let hasService = advertisedServices.contains(serviceUUID)
+        let match = OcleanDiscoveryPolicy.match(localName: localName, peripheralName: peripheral.name,
+            serviceUUIDs: advertisedServices.map(\.uuidString))
+        logger.info("Periferica vista nomeAdvertising=\(localName ?? "assente", privacy: .private) nomePeriferica=\(peripheral.name ?? "assente", privacy: .private) serviceUUIDAdvertising=\(hasService, privacy: .public) RSSI=\(RSSI.intValue, privacy: .public) accettata=\(match.accepted, privacy: .public) motivo=\(match.rawValue, privacy: .public)")
+        guard match.accepted else { return }
         candidates[peripheral.identifier] = peripheral
     }
 
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         guard isBusy, phase == .connecting, target === peripheral else { return }
-        phase = .services; status = "Ricerca dei servizi richiestiâ€¦"
+        phase = .services; status = "Ricerca dei servizi richiesti…"
         peripheral.discoverServices([serviceUUID, disUUID])
     }
 
@@ -267,7 +301,7 @@ extension OcleanBLEClient: CBCentralManagerDelegate {
             let ns = error as NSError?
             captureIssue = ns?.domain == CBErrorDomain && ns?.code == CBError.Code.peerRemovedPairingInformation.rawValue
                 ? .securityReported : .connectionUnavailable
-            finish("Collegamento non riuscito. Chiudi l’app Oclean. Il dispositivo potrebbe rifiutare un secondo central; nessun pairing forzato.", success: false)
+            finish(OcleanDiscoveryPolicy.failureMessage(.connectionUnavailable)!, success: false)
         }
     }
 
@@ -348,16 +382,17 @@ extension OcleanBLEClient: CBPeripheralDelegate {
         do {
             let request = try gate.claim(model: model, software: software)
             phase = .awaitingWriteResponse
-            status = "Richiesta dello storico inviata una sola voltaâ€¦"
+            status = "Richiesta dello storico inviata una sola volta…"
+            logger.info("Invio unico richiesta sessioni 03 07 su fbb89 con risposta")
             peripheral.writeValue(request, for: tx, type: .withResponse)
         } catch { finish("Richiesta non consentita: modello, versione o invio precedente non validi.", success: false) }
     }
 
     func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
         guard isBusy, target === peripheral, characteristic === tx, phase == .awaitingWriteResponse else { return }
-        guard error == nil else { finish("La richiesta dello storico non Ã¨ stata confermata dal collegamento.", success: false); return }
+        guard error == nil else { finish("La richiesta dello storico non è stata confermata dal collegamento.", success: false); return }
         writeAcknowledged = true; phase = .collecting
-        status = "Ricezione dello storico per 12 secondiâ€¦"
+        status = "Ricezione dello storico per 12 secondi…"
         let token = attemptID
         let timer = DispatchWorkItem { [weak self] in
             guard let self, self.attemptID == token else { return }

@@ -125,3 +125,12 @@ Riferimento metadati sync e sostituzione per versione:
 https://developer.apple.com/documentation/healthkit/hkmetadatakeysyncidentifier
 Errore di associazione specifico CoreBluetooth:
 https://developer.apple.com/documentation/corebluetooth/cberror-swift.struct/code/peerremovedpairinginformation
+
+## Correzione discovery dopo prova reale iPhone (10 novembre 2026)
+
+La discovery ora recupera prima il device connesso/già verificato; in alternativa
+scansiona in foreground accettando nome Oclean OR servizio pubblicizzato.
+I vecchi riferimenti a scan solo per servizio sono superati. Il gate DIS è invariato.
+Leggere `ios/OpenBrush/DISCOVERY_FIX.md` nel progetto completo, oppure
+`DISCOVERY_FIX.md` nella cartella del pacchetto Mac. XCTest: 45 esistenti + 9 nuovi,
+da eseguire con Xcode; nessuna prova radio è stata avviata dall'agente.

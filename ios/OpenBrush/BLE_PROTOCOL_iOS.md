@@ -79,9 +79,13 @@ Non ci sono background mode, ripristino automatico di connessioni o pairing espl
 
 Sequenza di un singolo tentativo:
 
-1. Scansione8s filtrata solo su servizio
-   `8082caa8-41a6-4021-91c6-56f9b954cc18`.
-2. Nessun candidato o più candidati: stop. Nessun fallback a nomi o scansione libera.
+1. Prima della scan si uniscono le periferiche già connesse al sistema che espongono
+   il servizio e quella recuperabile tramite l'identifier locale già verificato DIS.
+   Un candidato viene usato direttamente; più identifier distinti bloccano il collegamento.
+2. Se non ci sono candidati recuperati: scan foreground8s senza filtro servizio,
+   con accettazione locale per nome advertising/peripheral contenente Oclean
+   (case-insensitive) OPPURE servizio Oclean nell'advertising. Gli altri sono scartati.
+   Nessun candidato o più candidati: stop. Sempre verifica DIS prima della richiesta.
 3. Collegamento all'unico candidato, discovery dei servizi Oclean e DIS180A.
 4. Risoluzione per UUID e verifica unicità/proprietà: TXfbb89 write, RXfbb90 notify,
    Model2A24 read e Software2A28 read. Nessun handle hardcoded.
@@ -118,9 +122,10 @@ Non sono differenze intenzionali del formato decodificato: la parità completa
 del risultato a parità di input/chiave è il contratto dei66 vettori.
 Le seguenti differenze riguardano trasporto e ambiente:
 
-- scan iOS strettamente per servizio (richiesta esplicita del task); Python può
-  riconoscere anche nomi Oclean. GATT presente non prova che il servizio sia
-  nell'advertising: se il filtro non trova il dispositivo, non viene aggirato;
+- discovery aggiornata dopo la prova reale iPhone: retrieval prima della scan,
+  matching nome Oclean OR servizio come il Python. Il controllo DIS rimane il gate.
+  Vedi DISCOVERY_FIX.md per diagnosi e nuova prova. Le note precedenti che
+  escludevano matching per nome e retrieval sono superate.
 - scan8s e watchdog75s comprensivo del cleanup locale, contro i timeout/configurazioni
   del banco Python. Nessun per-operation timeout30s aggiuntivo nel client iOS;
 - Python salva raw privati; iOS mantiene notifiche in memoria, senza log raw o

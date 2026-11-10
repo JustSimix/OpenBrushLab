@@ -6,7 +6,7 @@ import Combine
 final class SyncViewModel: ObservableObject {
     @Published private(set) var archive = SessionArchive()
     @Published private(set) var isBusy = false
-    @Published private(set) var status = "Chiudi lÃ¢â‚¬â„¢app Oclean e risveglia il display per sincronizzare."
+    @Published private(set) var status = "Chiudi l’app Oclean e risveglia il display per sincronizzare."
     @Published private(set) var storageBlocked = false
     @Published private(set) var reviewEvents: [String: [StoredBrushEvent]] = [:]
     let bluetooth: OcleanBLEClient?
@@ -20,7 +20,7 @@ final class SyncViewModel: ObservableObject {
          store: any SessionArchivePersistence, bluetooth: OcleanBLEClient? = nil) {
         self.capture = capture; self.writer = writer; self.store = store; self.bluetooth = bluetooth
         do { archive = try store.load() }
-        catch { storageBlocked = true; status = "Archivio non leggibile: sincronizzazione bloccata. Non ÃƒÂ¨ stato sostituito nÃƒÂ© svuotato." }
+        catch { storageBlocked = true; status = "Archivio non leggibile: sincronizzazione bloccata. Non è stato sostituito né svuotato." }
     }
 
     static func live() -> SyncViewModel {
@@ -51,7 +51,7 @@ final class SyncViewModel: ObservableObject {
         do { try store.save(archive); return true }
         catch {
             storageBlocked = true
-            status = "Salvataggio locale non riuscito: nessun altro invio. Un invio a Salute giÃƒÂ  confermato puÃƒÂ² essere presente; non viene cancellato. Riapri lÃ¢â‚¬â„¢app per rileggere lÃ¢â‚¬â„¢archivio."
+            status = "Salvataggio locale non riuscito: nessun altro invio. Un invio a Salute già confermato può essere presente; non viene cancellato. Riapri l’app per rileggere l’archivio."
             return false
         }
     }
@@ -60,14 +60,15 @@ final class SyncViewModel: ObservableObject {
         guard !isBusy, !storageBlocked, foreground else { return }
         isBusy = true
         defer { isBusy = false }
-        status = "Ricerca e letturaÃ¢â‚¬Â¦ Risveglia ora il display e tieni lo spazzolino vicino."
+        status = "Ricerca e lettura… Risveglia ora il display e tieni lo spazzolino vicino."
         do {
             let envelope = try await capture.acquire()
             try SessionNormalizer.ingest(envelope, into: &archive)
             guard persist() else { return } // Permanent history BEFORE HealthKit.
-            guard foreground else { status = "Acquisizione conservata. Riprendi dallÃ¢â‚¬â„¢app in primo piano."; return }
+            guard foreground else { status = "Acquisizione conservata. Riprendi dall’app in primo piano."; return }
             if !envelope.transportCompleted {
-                status = "Lettura non conclusa. Chiudi Oclean; controlla vicinanza, display e Bluetooth. Nessun nuovo tentativo automatico."
+                status = bluetooth?.status ?? OcleanDiscoveryPolicy.failureMessage(envelope.issue)
+                    ?? "Lettura non conclusa. Chiudi Oclean; controlla vicinanza, display e Bluetooth. Nessun nuovo tentativo automatico."
                 return
             }
             if writer.client.writeAuthorization == .notDetermined {
