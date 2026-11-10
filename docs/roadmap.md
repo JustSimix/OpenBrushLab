@@ -1,8 +1,9 @@
 # Roadmap basata su evidenze
 
 1. **Ora, implementato e verificato offline:** scanner, inventario GATT,
-   letture standard, privacy, timeout e test con client simulati. Nessuna
-   conferma del comportamento reale dell'adattatore o dello spazzolino.
+   letture standard, privacy, timeout e test con client simulati. L'utente ha
+   riportato scan/connessione/letture standard riuscite su OCLEANY3X; vedere
+   [evidenze e limiti](ocleany3x.md). Inventario GATT e protocollo vendor da validare.
 2. **Validazione Y208 / 1.0.0.36:** raccogliere scan/gatt/read redatti, confermare
    DIS e proprietà UUID; annotare stato base e risveglio. Criterio: batteria e
    revisioni ripetibili, nessuna scrittura GATT o subscription. Non aggiornare

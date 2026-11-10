@@ -158,3 +158,29 @@ def test_total_timeout_disconnects_connected_client():
     with pytest.raises(TimeoutError):
         asyncio.run(run_ble(args, JsonLog(io.StringIO()), Scanner, Slow))
     assert Base.disconnected
+
+
+def test_reported_y3x_revisions_compare_after_all_reads():
+    # Regression based on user-supplied read results; no hardware involved.
+    client = fixture([char("2a24", b"OCLEANY3X"), char("2a26", b"1.0"),
+                      char("2a27", b"unknown-private-hardware"), char("2a28", b"1.0.0.36")])
+    stream = io.StringIO()
+    assert asyncio.run(inspect(client, device(), "read", 1, JsonLog(stream))) == 0
+    rows = [json.loads(line) for line in stream.getvalue().splitlines()]
+    comparisons = [row for row in rows if row["event"] == "target_comparison"]
+    assert len(comparisons) == 1
+    assert rows[-1] == comparisons[0]
+    assert comparisons[0]["matches"] is True
+    assert comparisons[0]["matching_fields"] == ["software"]
+    assert comparisons[0]["observed_revisions"] == {"firmware": "1.0", "software": "1.0.0.36"}
+    assert "unknown-private-hardware" not in stream.getvalue()
+
+
+def test_missing_revisions_are_unknown_not_mismatch():
+    client = fixture([char("2a24", b"OCLEANY3X")])
+    stream = io.StringIO()
+    assert asyncio.run(inspect(client, device(), "read", 1, JsonLog(stream))) == 2
+    rows = [json.loads(line) for line in stream.getvalue().splitlines()]
+    assert rows[-1]["event"] == "target_comparison"
+    assert rows[-1]["matches"] is None
+    assert rows[-1]["matching_fields"] == []

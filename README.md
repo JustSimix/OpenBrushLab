@@ -10,7 +10,9 @@ Implementati: scansione BLE, selezione esplicita del dispositivo, inventario
 GATT, letture standard con allowlist (modello, firmware, hardware, software,
 batteria), log redatti, decoder STATUS esclusivamente offline e test simulati.
 Non implementati: comandi vendor, lettura sessioni dal dispositivo, impostazioni,
-capture notifiche, display, OTA. Il firmware 1.0.0.36 **non è validato**.
+capture notifiche, display, OTA. Il protocollo vendor su firmware 1.0.0.36 **non è validato**.
+L'utente ha riportato letture standard riuscite su OCLEANY3X: 2A26=1.0,
+2A28=1.0.0.36, batteria 83%; dettagli in [nota OCLEANY3X](docs/ocleany3x.md).
 Y208 è il modello commerciale: il modello DIS va misurato, non presunto.
 
 Nessuna funzione trasmette scritture GATT. Non si attivano notifiche, perché
@@ -40,8 +42,8 @@ né cambiare ExecutionPolicy. Per reinstallarlo basta il comando pip sopra.
 ## Primo esperimento sullo spazzolino
 
 Chiudere l'app Oclean sul telefono, attivare Bluetooth Windows, avvicinare e
-svegliare lo spazzolino. Nessun esperimento sul dispositivo è stato eseguito
-automaticamente nella preparazione del progetto.
+svegliare lo spazzolino. Nessun esperimento sul dispositivo viene eseguito automaticamente
+dall'agente; le osservazioni hardware sopra provengono dai risultati dell'utente.
 
 ```powershell
 .\.venv\Scripts\python.exe -m openbrushlab scan --log logs\scan-01.jsonl
@@ -69,6 +71,10 @@ scansione vuota, verificando con attenzione il dispositivo da selezionare.
 `gatt` elenca UUID, handle, proprietà e metadati dei descrittori; non ne legge i
 valori. `read` non legge seriale, System ID o caratteristiche proprietarie.
 Valori DIS inattesi sono sostituiti con `[redacted-unrecognized-value]`.
+Il confronto target viene emesso una sola volta dopo le letture: considera sia
+Firmware Revision (2A26) sia Software Revision (2A28), riportando i campi che
+coincidono con 1.0.0.36. `matches: null` significa nessuna versione numerica
+disponibile. Una corrispondenza non convalida il protocollo vendor.
 Ogni lettura richiede una sola caratteristica leggibile nel servizio standard
 atteso; duplicati vengono saltati. Nessun tentativo automatico di pairing.
 
@@ -113,4 +119,6 @@ Vedere [protocollo](docs/protocol.md), [roadmap](docs/roadmap.md),
 Sorgenti adattati distribuiti con GPL-3.0-only; licenza MIT conservata per le
 costanti di deniskie. Nessuna dipendenza runtime da ESPHome o Home Assistant.
 Le copie di studio complete sono in `.research/`, ignorate da Git e mai importate.
-Repository Git solo locale, nessun remoto configurato e nessuna pubblicazione.
+Nella preparazione iniziale Git è stato inizializzato senza remoti. Gli
+aggiornamenti del laboratorio non configurano remoti e non pubblicano il codice;
+la configurazione Git aggiunta successivamente dall'utente viene conservata.

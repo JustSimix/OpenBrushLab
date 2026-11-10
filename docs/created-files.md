@@ -11,6 +11,8 @@ Nessun fallback usato. File del progetto (percorsi relativi):
 - `THIRD_PARTY_NOTICES.md`
 - `docs/created-files.md`
 - `docs/environment-tested.txt`
+- `docs/ocleany3x.md`
+- `docs/revision-validation.txt`
 - `docs/protocol.md`
 - `docs/roadmap.md`
 - `docs/validation.txt`
@@ -29,6 +31,6 @@ Nessun fallback usato. File del progetto (percorsi relativi):
 - `third_party/deniskie-MIT.txt`
 
 Directory locali generate, escluse dal versionamento: `.venv/` (ambiente Python), `.research/` (due cloni upstream shallow con Git e licenze), `.pytest_cache/`, `__pycache__/`, `src/openbrushlab.egg-info/`. La directory `.git/` è il repository locale.
-Nessun file .env reale né log di dispositivi creato. I file temporanei di costruzione sono nel work/ della chat, non costituiscono un progetto alternativo.
+Nessun file .env reale creato dall'agente; logs/ può contenere i log acquisiti dall'utente. I file temporanei di costruzione sono nel work/ della chat, non costituiscono un progetto alternativo.
 
 Build verificata: wheel in `.research/wheels/`, file temporanei in `build/` (ignorati da Git).

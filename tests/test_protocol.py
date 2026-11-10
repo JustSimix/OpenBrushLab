@@ -34,3 +34,23 @@ def test_synthetic_status():
 def test_invalid_status(payload):
     with pytest.raises(ValueError):
         decode_status(bytes.fromhex(payload))
+
+
+@pytest.mark.parametrize("revisions,matches,fields", [
+    ({"firmware": "1.0", "software": "1.0.0.36"}, True, ["software"]),
+    ({"firmware": "1.0.0.36"}, True, ["firmware"]),
+    ({"firmware": "1.0.0.36", "software": "1.0.0.36"}, True, ["firmware", "software"]),
+    ({"firmware": "1.0", "software": "1.0.0.35"}, False, []),
+    ({"software": "1.0.0.360"}, False, []),
+    ({}, None, []),
+    ({"firmware": "[redacted-unrecognized-value]", "software": None}, None, []),
+    ({"firmware": "private-serial", "hardware": "1.0.0.36"}, None, []),
+    ({"firmware": "Rev.D"}, None, []),
+])
+def test_revision_comparison(revisions, matches, fields):
+    from openbrushlab.protocol import compare_revisions
+    result = compare_revisions(revisions)
+    assert result["matches"] is matches
+    assert result["matching_fields"] == fields
+    assert result["compatibility"] == "unvalidated"
+    assert "private-serial" not in str(result)

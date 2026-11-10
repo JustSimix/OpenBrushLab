@@ -4,7 +4,7 @@
 No notification subscription: enabling CCCD can itself cause a GATT write.
 """
 import asyncio
-from .protocol import (OCLEAN_SERVICE_UUID, READ_FIELDS, EXPECTED_SERVICES, decode_value)
+from .protocol import (OCLEAN_SERVICE_UUID, READ_FIELDS, EXPECTED_SERVICES, decode_value, compare_revisions)
 
 
 async def scan(scanner, timeout, log, all_devices=False):
@@ -40,6 +40,7 @@ async def inspect(client_factory, device, mode, timeout, log):
                 if field and service.uuid.lower() == EXPECTED_SERVICES[field]:
                     available.setdefault(char.uuid.lower(), []).append(char)
         failures = 0
+        read_values = {}
         for uuid, field in READ_FIELDS.items():
             matches = available.get(uuid, [])
             if len(matches) != 1 or "read" not in matches[0].properties:
@@ -51,13 +52,12 @@ async def inspect(client_factory, device, mode, timeout, log):
                     payload = await client.read_gatt_char(matches[0])
                 value = decode_value(field, payload)
                 log.emit("read", field=field, value=value)
-                if field == "firmware":
-                    log.emit("target_comparison", expected="1.0.0.36", matches=value == "1.0.0.36",
-                             compatibility="unvalidated")
+                read_values[field] = value
             except Exception:
                 # Backend messages may include addresses, paths or identifiers.
                 log.emit("read_failed", field=field, reason="read-or-decode-error")
                 failures += 1
+        log.emit("target_comparison", **compare_revisions(read_values))
         return 2 if failures else 0
 
 

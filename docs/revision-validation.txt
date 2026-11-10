@@ -1,0 +1,23 @@
+2026-11-10: revision comparison update on Windows.
+
+52 offline tests passed in 0.43s; pip check: No broken requirements found.
+Only scanner/client mocks used. No real BLE scan, connection, write,
+subscription, pairing or firmware operation performed by the agent.
+
+Regression based on user-supplied observations:
+model=OCLEANY3X / firmware=1.0 / software=1.0.0.36
+=> matches=true, matching_fields=[software].
+Missing or redacted numeric revisions => matches=null.
+Vendor protocol compatibility remains unvalidated.
+
+The first verification script assumed Git still had no remotes and stopped
+after the tests/check on discovering origin already exists. This was not a
+test failure. The existing remote configuration was preserved. No remote
+was added/changed, no commit/push/publication was performed in this update.
+
+Modified: README.md, docs/created-files.md, docs/protocol.md, docs/roadmap.md,
+src/openbrushlab/ble.py, src/openbrushlab/protocol.py,
+tests/test_ble.py, tests/test_protocol.py.
+Created: docs/ocleany3x.md, docs/revision-validation.txt.
+
+Upstream references pinned in docs/ocleany3x.md. No upstream clone modified.

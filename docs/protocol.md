@@ -1,7 +1,8 @@
 # Protocollo: evidenze e limiti
 
 Target dichiarato dall'utente: Oclean X Pro Elite Y208, firmware 1.0.0.36.
-Nessuna cattura hardware raccolta nella creazione del progetto. Tutti gli offset
+Nessuna cattura hardware raccolta dall'agente. Letture standard OCLEANY3X
+riportate dall'utente e nuove evidenze upstream sono in [ocleany3x.md](ocleany3x.md). Tutti gli offset
 vendor sotto sono evidenze upstream o ipotesi da verificare su questo firmware.
 
 ## Fonti fissate

@@ -49,3 +49,21 @@ def decode_status(payload):
         raise ValueError("invalid status values")
     return {"dock_code": payload[2], "voltage_mv": int.from_bytes(payload[3:5], "big"),
             "battery": payload[5], "validation": "upstream-layout-only"}
+
+
+def compare_revisions(read_values, expected="1.0.0.36"):
+    """Compare exact numeric versions from both DIS revision characteristics.
+
+    A matching label is evidence for the target version, not proof of vendor
+    protocol compatibility. Missing/redacted/non-version values stay unknown.
+    """
+    observed = {}
+    for field in ("firmware", "software"):
+        value = read_values.get(field)
+        if isinstance(value, str) and re.fullmatch(r"[0-9]+(?:\.[0-9]+){1,5}", value):
+            observed[field] = value
+    matching = [field for field, value in observed.items() if value == expected]
+    return {"expected": expected, "observed_revisions": observed,
+            "matching_fields": matching,
+            "matches": bool(matching) if observed else None,
+            "compatibility": "unvalidated"}
